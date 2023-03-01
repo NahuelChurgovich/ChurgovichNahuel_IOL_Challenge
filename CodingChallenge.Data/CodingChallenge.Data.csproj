@@ -52,7 +52,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\FormaGeometrica.cs" />
+    <Compile Include="Classes\Figures\Cuadrado.cs" />
+    <Compile Include="Classes\Figures\Pentagono.cs" />
+    <Compile Include="Classes\Figures\Trapecio.cs" />
+    <Compile Include="Classes\Figures\Hexagono.cs" />
+    <Compile Include="Classes\Figures\Triangulo.cs" />
+    <Compile Include="Classes\Figures\Rectangulo.cs" />
+    <Compile Include="Classes\Figures\Circulo.cs" />
+    <Compile Include="Classes\Figures\FormaGeometrica.cs" />
+    <Compile Include="Interfaces\IFiguraGeometrica.cs" />
+    <Compile Include="Classes\Program.cs" />
+    <Compile Include="Classes\Traductor.cs" />
+    <Compile Include="Enums\EnumTipoFigura.cs" />
+    <Compile Include="Enums\EnumIdiomas.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
