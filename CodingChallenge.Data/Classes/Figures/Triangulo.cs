@@ -10,26 +10,21 @@ namespace CodingChallenge.Data.Classes
 {
     public class Triangulo : FormaGeometrica, IFiguraGeometrica
     {
-        public Triangulo()
+        static Triangulo()
         {
             Tipo = Enums.EnumTipoFigura.Triangulo;
             CantidadLados = 3;
         }
-        public Triangulo(decimal ladoInferio, decimal altura) : this()
+        public Triangulo(decimal? ladoInferior, decimal? altura, decimal? radio)
+            : base(ladoInferior, altura, radio)
         {
-            this.Base = ladoInferio;
-            this.Altura = altura;
         }
 
         public decimal CalcularArea()
         {
-            return 0;
+            return (Base.Value * Altura.Value) / 2;
         }
 
-        public decimal CalcularPerimetro()
-        {
-            return 0;
-        }
 
     }
 }

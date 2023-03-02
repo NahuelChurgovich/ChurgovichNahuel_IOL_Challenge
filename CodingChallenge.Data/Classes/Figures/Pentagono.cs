@@ -10,25 +10,19 @@ namespace CodingChallenge.Data.Classes
 {
     public class Pentagono : FormaGeometrica, IFiguraGeometrica
     {
-        public Pentagono()
+        static Pentagono()
         {
             Tipo = Enums.EnumTipoFigura.Pentagono;
             CantidadLados = 5;
         }
-        public Pentagono(decimal ladoInferio) : this()
+        public Pentagono(decimal? ladoInferior, decimal? altura, decimal? radio)
+            : base(ladoInferior, altura, radio)
         {
-            this.Base = ladoInferio;
         }
 
         public decimal CalcularArea()
         {
-            return 0;
+            return (CalcularPerimetro() * Base.Value) / 2;
         }
-
-        public decimal CalcularPerimetro()
-        {
-            return 0;
-        }
-
     }
 }

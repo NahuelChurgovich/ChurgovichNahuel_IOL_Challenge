@@ -10,25 +10,24 @@ namespace CodingChallenge.Data.Classes
 {
     public class Rectangulo : FormaGeometrica, IFiguraGeometrica
     {
-        public Rectangulo()
+        static Rectangulo()
         {
             Tipo = Enums.EnumTipoFigura.Rectangulo;
             CantidadLados = 4;
         }
-        public Rectangulo(decimal ladoInferio, decimal altura):this()
+        public Rectangulo(decimal? ladoInferior, decimal? altura, decimal? radio)
+            : base(ladoInferior, altura, radio)
         {
-            this.Base = ladoInferio;
-            this.Altura = altura;
         }
 
         public decimal CalcularArea()
         {
-            return 0;
+            return Base.Value * Altura.Value;
         }
 
-        public decimal CalcularPerimetro()
+        public override decimal CalcularPerimetro()
         {
-            return 0;
+            return (Base.Value * 2) + (Altura.Value * 2);
         }
 
     }

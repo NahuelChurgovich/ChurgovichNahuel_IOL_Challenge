@@ -10,25 +10,27 @@ namespace CodingChallenge.Data.Classes
 {
     public class Trapecio : FormaGeometrica, IFiguraGeometrica
     {
-        public Trapecio()
+        private decimal? ladoSuperior;
+        public decimal? BaseSuperior { get => ladoSuperior; set => this.ladoSuperior = value; }
+        static Trapecio()
         {
             Tipo = Enums.EnumTipoFigura.Trapecio;
             CantidadLados = 4;
         }
-        public Trapecio(decimal ladoInferio, decimal altura):this()
+        public Trapecio(decimal? ladoInferior, decimal? altura, decimal? radio, decimal? ladoSuperior)
+            : base(ladoInferior, altura, radio)
         {
-            this.Base = ladoInferio;
-            this.Altura = altura;
+            this.ladoSuperior = ladoSuperior;
         }
 
         public decimal CalcularArea()
         {
-            return 0;
+            return (decimal)((ladoSuperior + Base.Value) * Altura.Value) / 2;
         }
 
-        public decimal CalcularPerimetro()
+        public override decimal CalcularPerimetro()
         {
-            return 0;
+            return (decimal)Math.Sqrt((double)((Altura.Value * Altura.Value) + Math.Abs((decimal)ladoSuperior - Base.Value)));
         }
 
     }

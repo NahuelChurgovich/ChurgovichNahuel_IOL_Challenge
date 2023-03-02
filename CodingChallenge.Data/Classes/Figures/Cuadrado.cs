@@ -10,26 +10,19 @@ namespace CodingChallenge.Data.Classes
 {
     public class Cuadrado : FormaGeometrica, IFiguraGeometrica
     {
-        public Cuadrado()
+        static Cuadrado()
         {
             Tipo = Enums.EnumTipoFigura.Cuadrado;
             CantidadLados = 4;
         }
-        public Cuadrado(decimal ladoInferio):this()
+        public Cuadrado(decimal? ladoInferior, decimal? altura, decimal? radio)
+            : base(ladoInferior, altura, radio)
         {
-            this.Base = ladoInferio;
-            this.Altura = ladoInferio;
         }
 
         public decimal CalcularArea()
         {
-            return 0;
+            return Base.Value * Altura.Value == 0 ? (Base.Value * Base.Value == 0 ? Altura.Value * Altura.Value : Base.Value * Base.Value) : Base.Value * Altura.Value;
         }
-
-        public decimal CalcularPerimetro()
-        {
-            return 0;
-        }
-
     }
 }

@@ -8,7 +8,6 @@ namespace CodingChallenge.Data.Interfaces
 {
     public interface IFiguraGeometrica
     {
-        decimal CalcularArea();
-        decimal CalcularPerimetro();       
+        decimal CalcularArea();      
     }
 }
