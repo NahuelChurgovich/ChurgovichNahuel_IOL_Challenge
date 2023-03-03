@@ -8,7 +8,7 @@ using CodingChallenge.Data.Interfaces;
 
 namespace CodingChallenge.Data.Classes
 {
-    public class Trapecio : FormaGeometrica, IFiguraGeometrica
+    public class Trapecio : FormaGeometrica, IImprimible
     {
         private decimal? ladoSuperior;
         private decimal? BaseSuperior { get => ladoSuperior; set => this.ladoSuperior = value; }
@@ -38,5 +38,6 @@ namespace CodingChallenge.Data.Classes
 
         public decimal? GetBaseSuperior() { return BaseSuperior; }
 
+        public string Imprimir() { return $"{this.tipo} | Área {this.area:#.##} | Perímetro {this.perimetro:#.##} | Base {this.ladoInferior:#.##}| Altura {this.altura:#.##}| Base Superior {this.ladoSuperior:#.##} <br/>"; }
     }
 }

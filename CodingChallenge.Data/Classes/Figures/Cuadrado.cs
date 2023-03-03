@@ -8,7 +8,7 @@ using CodingChallenge.Data.Interfaces;
 
 namespace CodingChallenge.Data.Classes
 {
-    public class Cuadrado : FormaGeometrica, IFiguraGeometrica
+    public class Cuadrado : FormaGeometrica, IImprimible
     {
         static Cuadrado()
         {
@@ -38,5 +38,7 @@ namespace CodingChallenge.Data.Classes
                 Area = Altura.Value * Altura.Value;
             }
         }
+
+        public string Imprimir() { return $"{this.tipo} | Área {this.area:#.##} | Perímetro {this.perimetro:#.##} | Base {this.ladoInferior:#.##}<br/>"; }
     }
 }

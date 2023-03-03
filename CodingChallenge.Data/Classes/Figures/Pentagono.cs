@@ -8,7 +8,7 @@ using CodingChallenge.Data.Interfaces;
 
 namespace CodingChallenge.Data.Classes
 {
-    public class Pentagono : FormaGeometrica, IFiguraGeometrica
+    public class Pentagono : FormaGeometrica, IImprimible
     {
         static Pentagono()
         {
@@ -24,7 +24,9 @@ namespace CodingChallenge.Data.Classes
         }
         protected override void CalcularArea()
         {
-            Area = (GetPerimetro() * Base.Value) / 2;
+            Area = (this.perimetro * Base.Value) / 2;
         }
+
+        public string Imprimir() { return $"{this.tipo} | Área {this.area:#.##} | Perímetro {this.perimetro:#.##} | Base {this.ladoInferior:#.##}<br/>"; }
     }
 }

@@ -8,7 +8,7 @@ using CodingChallenge.Data.Interfaces;
 
 namespace CodingChallenge.Data.Classes
 {
-    public class Triangulo : FormaGeometrica, IFiguraGeometrica
+    public class Triangulo : FormaGeometrica, IImprimible
     {
         static Triangulo()
         {
@@ -28,6 +28,6 @@ namespace CodingChallenge.Data.Classes
             Area = (Base.Value * Altura.Value) / 2;
         }
 
-
+        public string Imprimir() { return $"{this.tipo} | Área {this.area:#.##} | Perímetro {this.perimetro:#.##} | Base {this.ladoInferior:#.##}| Altura {this.altura:#.##}<br/>"; }
     }
 }

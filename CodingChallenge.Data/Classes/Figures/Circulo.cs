@@ -8,10 +8,10 @@ using CodingChallenge.Data.Interfaces;
 
 namespace CodingChallenge.Data.Classes
 {
-    public class Circulo : FormaGeometrica, IFiguraGeometrica
+    public class Circulo : FormaGeometrica, IImprimible
     {
         static Circulo()
-        {            
+        {
             CantidadLados = 0;
         }
         public Circulo(decimal? ladoInferior, decimal? altura, decimal? radio)
@@ -30,9 +30,9 @@ namespace CodingChallenge.Data.Classes
         }
         protected override void CalcularArea()
         {
-            Area = Math.Round((decimal)Math.PI * Radio.Value * Radio.Value,2); 
+            Area = Math.Round((decimal)Math.PI * Radio.Value * Radio.Value, 2);
         }
 
-
+        public string Imprimir() { return $"{this.tipo} | Área {this.area:#.##} | Perímetro {this.perimetro:#.##} | Radio {this.radio:#.##}<br/>"; }
     }
 }

@@ -8,7 +8,7 @@ using CodingChallenge.Data.Interfaces;
 
 namespace CodingChallenge.Data.Classes
 {
-    public class Rectangulo : FormaGeometrica, IFiguraGeometrica
+    public class Rectangulo : FormaGeometrica, IImprimible
     {
         static Rectangulo()
         {
@@ -32,6 +32,6 @@ namespace CodingChallenge.Data.Classes
             Area = Base.Value * Altura.Value;
         }
 
-
+        public string Imprimir() { return $"{this.tipo} | Área {this.area:#.##} | Perímetro {this.perimetro:#.##} | Base {this.ladoInferior:#.##}| Altura {this.altura:#.##}<br/>"; }
     }
 }

@@ -19,12 +19,12 @@ namespace CodingChallenge.Data.Classes
     public abstract class FormaGeometrica
     {
         #region Atributos
-        private EnumTipoFigura tipo;
-        private decimal perimetro;
-        private decimal area;
-        private decimal? ladoInferior; // este atributo representa la base, pero dicha nomenclatura no se puede utilizar por se una palabra reservada.
-        private decimal? altura;
-        private decimal? radio;
+        public EnumTipoFigura tipo;
+        public decimal perimetro;
+        public decimal area;
+        public decimal? ladoInferior; // este atributo representa la base, pero dicha nomenclatura no se puede utilizar por se una palabra reservada.
+        public decimal? altura;
+        public decimal? radio;
         #endregion
 
         #region Propiedades
@@ -75,14 +75,6 @@ namespace CodingChallenge.Data.Classes
         protected virtual void CalcularArea()
         {
         }
-
-        public EnumTipoFigura GetTipo() { return Tipo; }
-        public decimal GetCantidadLados() { return CantidadLados; }
-        public decimal GetPerimetro() { return Perimetro; }
-        public decimal GetArea() { return Area; }
-        public decimal? GetBase() { return Base; }
-        public decimal? GetAltura() { return Altura; }
-        public decimal? GetRadio() { return Radio; }
 
         #endregion
 
