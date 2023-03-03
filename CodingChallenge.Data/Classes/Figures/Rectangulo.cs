@@ -12,23 +12,26 @@ namespace CodingChallenge.Data.Classes
     {
         static Rectangulo()
         {
-            Tipo = Enums.EnumTipoFigura.Rectangulo;
             CantidadLados = 4;
         }
         public Rectangulo(decimal? ladoInferior, decimal? altura, decimal? radio)
             : base(ladoInferior, altura, radio)
         {
+            Tipo = Enums.EnumTipoFigura.Rectangulo;
+            Radio = null;
+            CalcularPerimetro();
+            CalcularArea();
         }
 
-        public decimal CalcularArea()
+        protected override void CalcularPerimetro()
         {
-            return Base.Value * Altura.Value;
+            Perimetro = (Base.Value * 2) + (Altura.Value * 2);
+        }
+        protected override void CalcularArea()
+        {
+            Area = Base.Value * Altura.Value;
         }
 
-        public override decimal CalcularPerimetro()
-        {
-            return (Base.Value * 2) + (Altura.Value * 2);
-        }
 
     }
 }

@@ -12,17 +12,20 @@ namespace CodingChallenge.Data.Classes
     {
         static Hexagono()
         {
-            Tipo = Enums.EnumTipoFigura.Hexagono;
             CantidadLados = 6;
         }
         public Hexagono(decimal? ladoInferior, decimal? altura, decimal? radio)
             : base(ladoInferior, altura, radio)
         {
+            Tipo = Enums.EnumTipoFigura.Hexagono;
+            Radio = null;
+            CalcularPerimetro();
+            CalcularArea();
         }
 
-        public decimal CalcularArea()
+        protected override void CalcularArea()
         {
-            return (CalcularPerimetro() * Base.Value) / 2;
+            Area = (GetPerimetro() * Base.Value) / 2;
         }
     }
 }

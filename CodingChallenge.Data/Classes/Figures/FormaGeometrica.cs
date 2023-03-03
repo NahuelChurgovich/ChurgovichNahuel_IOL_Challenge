@@ -4,7 +4,7 @@
  *
  * Se puede hacer cualquier cambio que se crea necesario tanto en el código como en los tests. La única condición es que los tests pasen OK.
  *
- * TODO: Implementar Trapecio/Rectangulo, agregar otro idioma a reporting.
+ * TODO: Implementar Trapecio/Rectángulo, agregar otro idioma a reporting.
  * */
 
 using System;
@@ -20,23 +20,22 @@ namespace CodingChallenge.Data.Classes
     {
         #region Atributos
         private EnumTipoFigura tipo;
-        private int cantidadLados;
         private decimal perimetro;
         private decimal area;
-        private decimal? ladoInferior; // este atributo representa la base, pero dina nomenclatura no se puede utilizar por se una palabra reservada.
+        private decimal? ladoInferior; // este atributo representa la base, pero dicha nomenclatura no se puede utilizar por se una palabra reservada.
         private decimal? altura;
         private decimal? radio;
         #endregion
 
         #region Propiedades
 
-        public static EnumTipoFigura Tipo { get; set; }
-        public static int CantidadLados { get; set; }
-        public decimal Perimetro { get; set; }
-        public decimal Area { get; set; }
-        public decimal? Base { get; set; }
-        public decimal? Altura { get; set; }
-        public decimal? Radio { get; set; }
+        protected EnumTipoFigura Tipo { get => tipo; set => this.tipo = value; }
+        protected static int CantidadLados { get; set; }
+        protected decimal Perimetro { get => perimetro; set => this.perimetro = value; }
+        protected decimal Area { get => area; set => this.area = value; }
+        protected decimal? Base { get => ladoInferior; set => this.ladoInferior = value; }
+        protected decimal? Altura { get => altura; set => this.altura = value; }
+        protected decimal? Radio { get => radio; set => this.radio = value; }
         #endregion
 
         #region Constructores
@@ -48,13 +47,13 @@ namespace CodingChallenge.Data.Classes
         }
         #endregion
 
-        #region Metodos
+        #region Métodos
+
         /// <summary>
-        /// Calculara el perimetro de cualquier figura geometrica equilatera, sabiendo cual es su base.
+        /// Calculara el perímetro de cualquier figura geométrica equilatera, sabiendo cual es su base y seteara su atributo homónimo.
         /// </summary>
-        /// <returns>El perimetro calculado</returns>
         /// <exception cref="Exception"></exception>
-        public virtual decimal CalcularPerimetro()
+        protected virtual void CalcularPerimetro()
         {
             decimal perimetro = 0;
             try
@@ -63,13 +62,27 @@ namespace CodingChallenge.Data.Classes
                 {
                     perimetro += Base.Value;
                 }
-                return perimetro;
+                Perimetro = perimetro;
             }
             catch (Exception ex)
             {
-                throw new Exception("Ocurrio un error al calcular el perimetro", ex);
+                throw new Exception("Ocurrió un error al calcular el perímetro", ex);
             }
         }
+        /// <summary>
+        /// Se utiliza este método para que sea implementado en cada clase derivada realizando el calculo correspondiente a la figura representada.
+        /// </summary>
+        protected virtual void CalcularArea()
+        {
+        }
+
+        public EnumTipoFigura GetTipo() { return Tipo; }
+        public decimal GetCantidadLados() { return CantidadLados; }
+        public decimal GetPerimetro() { return Perimetro; }
+        public decimal GetArea() { return Area; }
+        public decimal? GetBase() { return Base; }
+        public decimal? GetAltura() { return Altura; }
+        public decimal? GetRadio() { return Radio; }
 
         #endregion
 

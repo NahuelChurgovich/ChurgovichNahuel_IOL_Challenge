@@ -11,24 +11,28 @@ namespace CodingChallenge.Data.Classes
     public class Circulo : FormaGeometrica, IFiguraGeometrica
     {
         static Circulo()
-        {
-            Tipo = Enums.EnumTipoFigura.Circulo;
+        {            
             CantidadLados = 0;
         }
         public Circulo(decimal? ladoInferior, decimal? altura, decimal? radio)
             : base(ladoInferior, altura, radio)
         {
+            Tipo = Enums.EnumTipoFigura.Circulo;
+            Base = null;
+            Altura = null;
+            CalcularPerimetro();
+            CalcularArea();
         }
 
-        public decimal CalcularArea()
+        protected override void CalcularPerimetro()
         {
-            return (decimal)Math.PI * Radio.Value * Radio.Value;
+            Perimetro = Math.Round((decimal)Math.PI * Radio.Value * 2, 2);
+        }
+        protected override void CalcularArea()
+        {
+            Area = Math.Round((decimal)Math.PI * Radio.Value * Radio.Value,2); 
         }
 
-        public override decimal CalcularPerimetro()
-        {
-            return (decimal)Math.PI * Radio.Value * 2;
-        }
 
     }
 }

@@ -12,17 +12,20 @@ namespace CodingChallenge.Data.Classes
     {
         static Triangulo()
         {
-            Tipo = Enums.EnumTipoFigura.Triangulo;
             CantidadLados = 3;
         }
         public Triangulo(decimal? ladoInferior, decimal? altura, decimal? radio)
             : base(ladoInferior, altura, radio)
         {
+            Tipo = Enums.EnumTipoFigura.Triangulo;
+            Radio = null;
+            CalcularPerimetro();
+            CalcularArea();
         }
 
-        public decimal CalcularArea()
+        protected override void CalcularArea()
         {
-            return (Base.Value * Altura.Value) / 2;
+            Area = (Base.Value * Altura.Value) / 2;
         }
 
 

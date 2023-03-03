@@ -12,17 +12,19 @@ namespace CodingChallenge.Data.Classes
     {
         static Pentagono()
         {
-            Tipo = Enums.EnumTipoFigura.Pentagono;
             CantidadLados = 5;
         }
         public Pentagono(decimal? ladoInferior, decimal? altura, decimal? radio)
             : base(ladoInferior, altura, radio)
         {
+            Tipo = Enums.EnumTipoFigura.Pentagono;
+            Radio = null;
+            CalcularPerimetro();
+            CalcularArea();
         }
-
-        public decimal CalcularArea()
+        protected override void CalcularArea()
         {
-            return (CalcularPerimetro() * Base.Value) / 2;
+            Area = (GetPerimetro() * Base.Value) / 2;
         }
     }
 }

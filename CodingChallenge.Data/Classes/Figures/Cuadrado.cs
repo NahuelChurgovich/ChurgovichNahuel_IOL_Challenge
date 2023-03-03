@@ -12,17 +12,31 @@ namespace CodingChallenge.Data.Classes
     {
         static Cuadrado()
         {
-            Tipo = Enums.EnumTipoFigura.Cuadrado;
             CantidadLados = 4;
         }
         public Cuadrado(decimal? ladoInferior, decimal? altura, decimal? radio)
             : base(ladoInferior, altura, radio)
         {
+            Tipo = Enums.EnumTipoFigura.Cuadrado;
+            Radio = null;
+            CalcularPerimetro();
+            CalcularArea();
         }
 
-        public decimal CalcularArea()
+        protected override void CalcularArea()
         {
-            return Base.Value * Altura.Value == 0 ? (Base.Value * Base.Value == 0 ? Altura.Value * Altura.Value : Base.Value * Base.Value) : Base.Value * Altura.Value;
+            if (Base.HasValue && Altura.HasValue && Base.Value==Altura.Value )
+            {
+                Area = Base.Value * Altura.Value;
+            }
+            else if (Base.HasValue)
+            {
+                Area = Base.Value * Base.Value;
+            }
+            else
+            {
+                Area = Altura.Value * Altura.Value;
+            }
         }
     }
 }
