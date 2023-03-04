@@ -11,24 +11,24 @@ namespace CodingChallenge.Data.Classes
 {
     public class Impresion
     {
-        public static string Imprimir(List<FormaGeometrica> formas)//INCLUIR EL IDIOMA
+        public static string Imprimir(List<FormaGeometrica> formas, EnumIdiomas idioma)//INCLUIR EL IDIOMA
         {
             var sb = new StringBuilder();
 
             if (!formas.Any())
             {
-                sb.Append("<h1>Lista vacía de formas!</h1>");
+                sb.Append($"<h1>{Traductor.Traducir("Lista de formas vacía!",idioma)}</h1>");
             }
             else
             {
-                sb.Append("Detalle:<br/>");
-                ImprimirDetalle(formas, sb);
+                sb.Append($"{Traductor.Traducir("Detalle",idioma)}:<br/>");
+                ImprimirDetalle(formas, sb, idioma);
 
-                sb.Append("Agrupado:<br/>");
-                ImprimirAgrupado(formas, sb);
+                sb.Append($"{Traductor.Traducir("Agrupado", idioma)}:<br/>");
+                ImprimirAgrupado(formas, sb, idioma);
 
-                sb.Append("TOTAL:<br/>");
-                ImprimirTotales(formas, sb);
+                sb.Append($"{Traductor.Traducir("TOTAL", idioma)}:<br/>");
+                ImprimirTotales(formas, sb, idioma);
             }
             return sb.ToString();
         }
@@ -38,7 +38,7 @@ namespace CodingChallenge.Data.Classes
         /// </summary>
         /// <param name="formas"></param>
         /// <param name="sb"></param>
-        private static void ImprimirDetalle(List<FormaGeometrica> formas, StringBuilder sb)
+        private static void ImprimirDetalle(List<FormaGeometrica> formas, StringBuilder sb, EnumIdiomas idioma)
         {
             int contadorCirculos = 1;
             int contadorRectangulos = 1;
@@ -53,35 +53,35 @@ namespace CodingChallenge.Data.Classes
                 switch (figura.tipo)
                 {
                     case EnumTipoFigura.Circulo:
-                        sb.Append($"{contadorCirculos}) {((IImprimible)figura).Imprimir()}<br/>");
+                        sb.Append($"{contadorCirculos}) {((IImprimible)figura).Imprimir(idioma)}<br/>");
                         contadorCirculos++;
                         break;
                     case EnumTipoFigura.Rectangulo:
-                        sb.Append($"{contadorRectangulos}) {((IImprimible)figura).Imprimir()}<br/>");
+                        sb.Append($"{contadorRectangulos}) {((IImprimible)figura).Imprimir(idioma)}<br/>");
                         contadorRectangulos++;
                         break;
                     case EnumTipoFigura.Triangulo:
-                        sb.Append($"{contadorTriangulos}) {((IImprimible)figura).Imprimir()}<br/>");
+                        sb.Append($"{contadorTriangulos}) {((IImprimible)figura).Imprimir(idioma)}<br/>");
                         contadorTriangulos++;
                         break;
                     case EnumTipoFigura.Cuadrado:
-                        sb.Append($"{contadorCuadrados}) {((IImprimible)figura).Imprimir()}<br/>");
+                        sb.Append($"{contadorCuadrados}) {((IImprimible)figura).Imprimir(idioma)}<br/>");
                         contadorCuadrados++;
                         break;
                     case EnumTipoFigura.Pentagono:
-                        sb.Append($"{contadorPentagonos}) {((IImprimible)figura).Imprimir()}<br/>");
+                        sb.Append($"{contadorPentagonos}) {((IImprimible)figura).Imprimir(idioma)}<br/>");
                         contadorPentagonos++;
                         break;
                     case EnumTipoFigura.Hexagono:
-                        sb.Append($"{contadorHexagonos}) {((IImprimible)figura).Imprimir()}<br/>");
+                        sb.Append($"{contadorHexagonos}) {((IImprimible)figura).Imprimir(idioma)}<br/>");
                         contadorHexagonos++;
                         break;
                     case EnumTipoFigura.Trapecio:
-                        sb.Append($"{contadorTrapecios}) {((IImprimible)figura).Imprimir()}<br/>");
+                        sb.Append($"{contadorTrapecios}) {((IImprimible)figura).Imprimir(idioma)}<br/>");
                         contadorTrapecios++;
                         break;
                     default:
-                        sb.Append($"-> Tipo de figura inexistente<br/>");
+                        sb.Append($"{Traductor.Traducir("-> Tipo de figura inexistente", idioma)}<br/>");
                         break;
                 }
             }
@@ -91,7 +91,7 @@ namespace CodingChallenge.Data.Classes
         /// </summary>
         /// <param name="formas"></param>
         /// <param name="sb"></param>
-        private static void ImprimirAgrupado(List<FormaGeometrica> formas, StringBuilder sb)
+        private static void ImprimirAgrupado(List<FormaGeometrica> formas, StringBuilder sb, EnumIdiomas idioma)
         {
             int cantidadCirculos = formas.Where(x => x.tipo == EnumTipoFigura.Circulo).Count();
             int cantidadRectangulos = formas.Where(x => x.tipo == EnumTipoFigura.Rectangulo).Count();
@@ -117,24 +117,81 @@ namespace CodingChallenge.Data.Classes
             decimal areaHexagonos = formas.Where(x => x.tipo == EnumTipoFigura.Hexagono).Sum(x => x.area);
             decimal areaTrapecios = formas.Where(x => x.tipo == EnumTipoFigura.Trapecio).Sum(x => x.area);
 
-            sb.Append($"Hay un total de {cantidadCirculos} Círculos, la sumatoria de sus áreas y perímetros es la siguiente: Área {areaCirculos:#.##} | Perímetro {perimetroCirculos:#.##} <br/>");
-            sb.Append($"Hay un total de {cantidadRectangulos} Rectángulos, la sumatoria de sus áreas y perímetros es la siguiente: Área {areaRectangulos:#.##} | Perímetro {perimetroRectangulos:#.##} <br/>");
-            sb.Append($"Hay un total de {cantidadTriangulos} Triángulos, la sumatoria de sus áreas y perímetros es la siguiente: Área {areaTriangulos:#.##} | Perímetro {perimetroTriangulos:#.##} <br/>");
-            sb.Append($"Hay un total de {cantidadCuadrados} Cuadrados, la sumatoria de sus áreas y perímetros es la siguiente: Área {areaCuadrados:#.##} | Perímetro {perimetroCuadrados:#.##} <br/>");
-            sb.Append($"Hay un total de {cantidadPentagonos} Pentágonos, la sumatoria de sus áreas y perímetros es la siguiente: Área {areaPentagonos:#.##} | Perímetro {perimetroPentagonos:#.##} <br/>");
-            sb.Append($"Hay un total de {cantidadHexagonos} Hexágonos, la sumatoria de sus áreas y perímetros es la siguiente: Área {areaHexagonos:#.##} | Perímetro {perimetroHexagonos:#.##} <br/>");
-            sb.Append($"Hay un total de {cantidadTrapecios} Trapecios, la sumatoria de sus áreas y perímetros es la siguiente: Área {areaTrapecios:#.##} | Perímetro {perimetroTrapecios:#.##} <br/>");
+            //TODO: modificar las lineas de texto siguientes para lograr la traduccion.
+
+            if (cantidadCirculos == 1)
+            {
+                sb.Append($"Hay solo un círculo, estos son los datos calculados: Área {areaCirculos:#.##} | Perímetro {perimetroCirculos:#.##}<br/>");
+            }
+            else if (cantidadCirculos > 1)
+            {
+                sb.Append($"Hay un total de {cantidadCirculos} círculos, la sumatoria de sus áreas y perímetros es la siguiente: Área {areaCirculos:#.##} | Perímetro {perimetroCirculos:#.##}<br/>");
+            }
+
+            if (cantidadRectangulos== 1)
+            {
+                sb.Append($"Hay solo un rectángulo, estos son los datos calculados: Área {areaCirculos:#.##} | Perímetro {perimetroCirculos:#.##}<br/>");
+            }
+            else if (cantidadRectangulos >1)
+            {
+                sb.Append($"Hay un total de {cantidadRectangulos} rectángulos, la sumatoria de sus áreas y perímetros es la siguiente: Área {areaRectangulos:#.##} | Perímetro {perimetroRectangulos:#.##}<br/>");
+            }
+
+            if (cantidadTriangulos == 1)
+            {
+                sb.Append($"Hay solo un triángulo, estos son los datos calculados: Área {areaCirculos:#.##} | Perímetro {perimetroCirculos:#.##}<br/>");
+            }
+            else if (cantidadTriangulos > 1)
+            {
+                sb.Append($"Hay un total de {cantidadTriangulos} triángulos, la sumatoria de sus áreas y perímetros es la siguiente: Área {areaTriangulos:#.##} | Perímetro {perimetroTriangulos:#.##}<br/>");
+            }
+
+            if (cantidadCuadrados == 1)
+            {
+                sb.Append($"Hay solo un cuadrado, estos son los datos calculados: Área {areaCirculos:#.##} | Perímetro {perimetroCirculos:#.##}<br/>");
+            }
+            else if (cantidadCuadrados > 1)
+            {
+                sb.Append($"Hay un total de {cantidadCuadrados} cuadrados, la sumatoria de sus áreas y perímetros es la siguiente: Área {areaCuadrados:#.##} | Perímetro {perimetroCuadrados:#.##}<br/>");
+            }
+
+            if (cantidadPentagonos == 1)
+            {
+                sb.Append($"Hay solo un pentágono, estos son los datos calculados: Área {areaCirculos:#.##} | Perímetro {perimetroCirculos:#.##}<br/>");
+            }
+            else if (cantidadPentagonos > 1)
+            {
+                sb.Append($"Hay un total de {cantidadPentagonos} pentágonos, la sumatoria de sus áreas y perímetros es la siguiente: Área {areaPentagonos:#.##} | Perímetro {perimetroPentagonos:#.##}<br/>");
+            }
+
+            if (cantidadHexagonos == 1)
+            {
+                sb.Append($"Hay solo un hexágono, estos son los datos calculados: Área {areaCirculos:#.##} | Perímetro {perimetroCirculos:#.##}<br/>");
+            }
+            else if (cantidadHexagonos > 1)
+            {
+                sb.Append($"Hay un total de {cantidadHexagonos} hexágonos, la sumatoria de sus áreas y perímetros es la siguiente: Área {areaHexagonos:#.##} | Perímetro {perimetroHexagonos:#.##}<br/>");
+            }
+
+            if (cantidadTrapecios == 1)
+            {
+                sb.Append($"Hay solo un trapecio, estos son los datos calculados: Área {areaCirculos:#.##} | Perímetro {perimetroCirculos:#.##}<br/>");
+            }
+            else if (cantidadTrapecios > 1)
+            {
+                sb.Append($"Hay un total de {cantidadTrapecios} trapecios, la sumatoria de sus áreas y perímetros es la siguiente: Área {areaTrapecios:#.##} | Perímetro {perimetroTrapecios:#.##}<br/>");
+            }
         }
         /// <summary>
         /// Imprime la cantidad de figuras procesadas y la sumatoria de sus perímetros y áreas.
         /// </summary>
         /// <param name="formas"></param>
         /// <param name="sb"></param>
-        private static void ImprimirTotales(List<FormaGeometrica> formas, StringBuilder sb)
+        private static void ImprimirTotales(List<FormaGeometrica> formas, StringBuilder sb, EnumIdiomas idioma)
         {
-            sb.Append($"Figuras procesadas = {formas.Count()}<br/>");
-            sb.Append($"Sumatoria de perímetros = {formas.Sum(x => x.perimetro):#.##}<br/>");
-            sb.Append($"Sumatoria de áreas = {formas.Sum(x => x.area):#.##}<br/>");
+            sb.Append($"{Traductor.Traducir("Figuras procesadas", idioma)} = {formas.Count()}<br/>");
+            sb.Append($"{Traductor.Traducir("Sumatoria de perímetros", idioma)} = {formas.Sum(x => x.perimetro):#.##}<br/>");
+            sb.Append($"{Traductor.Traducir("Sumatoria de áreas", idioma)} = {formas.Sum(x => x.area):#.##}<br/>");
         }
     }
 }
