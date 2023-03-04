@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CodingChallenge.Data.Enums;
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +11,6 @@ namespace CodingChallenge.Data.Interfaces
 {
     public interface IImprimible
     {
-        string Imprimir();
+        string Imprimir(EnumIdiomas idioma);
     }
 }

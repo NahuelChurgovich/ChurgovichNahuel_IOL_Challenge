@@ -11,7 +11,6 @@ namespace CodingChallenge.Data.Enums
         Castellano = 1,
         Ingles = 2,
         Italiano = 3,
-        Portugues = 4,
-        Aleman = 5
+        Portugues = 4
     }
 }
