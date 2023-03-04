@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using CodingChallenge.Data.Enums;
 using CodingChallenge.Data.Interfaces;
 
 namespace CodingChallenge.Data.Classes
@@ -33,6 +34,7 @@ namespace CodingChallenge.Data.Classes
             Area = Math.Round((decimal)Math.PI * Radio.Value * Radio.Value, 2);
         }
 
-        public string Imprimir() { return $"{this.tipo} | Área {this.area:#.##} | Perímetro {this.perimetro:#.##} | Radio {this.radio:#.##}<br/>"; }
+        public string Imprimir(EnumIdiomas idioma) { return $"{Traductor.Traducir($"{this.tipo}", idioma)} | {Traductor.Traducir("Área", idioma)} {this.area:#.##} | " +
+                $"{Traductor.Traducir("Perímetro", idioma)} {this.perimetro:#.##} | {Traductor.Traducir("Radio", idioma)} {this.radio:#.##}<br/>"; }
     }
 }

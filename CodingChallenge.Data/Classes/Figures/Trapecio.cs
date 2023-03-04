@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using CodingChallenge.Data.Enums;
 using CodingChallenge.Data.Interfaces;
 
 namespace CodingChallenge.Data.Classes
@@ -38,6 +39,11 @@ namespace CodingChallenge.Data.Classes
 
         public decimal? GetBaseSuperior() { return BaseSuperior; }
 
-        public string Imprimir() { return $"{this.tipo} | Área {this.area:#.##} | Perímetro {this.perimetro:#.##} | Base {this.ladoInferior:#.##}| Altura {this.altura:#.##}| Base Superior {this.ladoSuperior:#.##} <br/>"; }
+        public string Imprimir(EnumIdiomas idioma)
+        {
+            return $"{Traductor.Traducir($"{this.tipo}", idioma)} | {Traductor.Traducir("Área", idioma)} {this.area:#.##} | " +
+                    $"{Traductor.Traducir("Perímetro", idioma)} {this.perimetro:#.##} | {Traductor.Traducir("Base", idioma)} {this.ladoInferior:#.##} | " +
+                    $"{Traductor.Traducir("Altura", idioma)} {this.altura:#.##} | {Traductor.Traducir("Base Superior", idioma)} {this.ladoSuperior:#.##}<br/>";
+        }
     }
 }

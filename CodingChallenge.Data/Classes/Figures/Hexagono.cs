@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using CodingChallenge.Data.Enums;
 using CodingChallenge.Data.Interfaces;
 
 namespace CodingChallenge.Data.Classes
@@ -28,6 +29,10 @@ namespace CodingChallenge.Data.Classes
             Area = (this.perimetro * Base.Value) / 2;
         }
 
-        public string Imprimir() { return $"{this.tipo} | Área {this.area:#.##} | Perímetro {this.perimetro:#.##} | Base {this.ladoInferior:#.##}<br/>"; }
+        public string Imprimir(EnumIdiomas idioma)
+        {
+            return $"{Traductor.Traducir($"{this.tipo}", idioma)} | {Traductor.Traducir("Área", idioma)} {this.area:#.##} | " +
+                    $"{Traductor.Traducir("Perímetro", idioma)} {this.perimetro:#.##} | {Traductor.Traducir("Base", idioma)} {this.ladoInferior:#.##}<br/>";
+        }
     }
 }
