@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Resources;
-using System.Text;
-using System.Threading.Tasks;
 
 using CodingChallenge.Data.Enums;
-using CodingChallenge.Data.Traductor;
+using CodingChallenge.Data.Traductor.Recursos;
 
 namespace CodingChallenge.Data.Classes
 {
@@ -16,22 +11,31 @@ namespace CodingChallenge.Data.Classes
         public static string Traducir(string frase, EnumIdiomas idioma)
         {
             string retorno = string.Empty;
-            switch (idioma)
+
+            try
             {
-                case EnumIdiomas.Ingles:
-                    retorno = Diccionario.ResourceManager.GetString(frase, new CultureInfo("en-US"));
-                    break;
-                case EnumIdiomas.Italiano:
-                    retorno = Diccionario.ResourceManager.GetString(frase, new CultureInfo("it-IT"));
-                    break;
-                case EnumIdiomas.Portugues:
-                    retorno = Diccionario.ResourceManager.GetString(frase, new CultureInfo("pt-PT"));
-                    break;
-                default:
-                    retorno = frase;
-                    break;
+                switch (idioma)
+                {
+                    case EnumIdiomas.Ingles:
+                        retorno = Diccionario.ResourceManager.GetString(frase, new CultureInfo("en-US"));
+                        break;
+                    case EnumIdiomas.Italiano:
+                        retorno = Diccionario.ResourceManager.GetString(frase, new CultureInfo("it-IT"));
+                        break;
+                    case EnumIdiomas.Portugues:
+                        retorno = Diccionario.ResourceManager.GetString(frase, new CultureInfo("pt-PT"));
+                        break;
+                    default:
+                        retorno = frase; // por default devolverá la frase escrita tal como la recibe el método.
+                        break;
+                }
+                return retorno;
             }
-            return retorno;
+            catch (Exception ex)
+            {
+                return $"Este es el mensaje de la una excepción: {ex.Message}";
+            }
+           
         }
     }
 }
