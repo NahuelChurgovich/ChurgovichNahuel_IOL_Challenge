@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using CodingChallenge.Data.Enums;
 using CodingChallenge.Data.Interfaces;
@@ -13,12 +9,12 @@ namespace CodingChallenge.Data.Classes
     {
         static Triangulo()
         {
-            CantidadLados = 3;
         }
-        public Triangulo(decimal? ladoInferior, decimal? altura, decimal? radio)
+        public Triangulo(double? ladoInferior, double? altura, double? radio)
             : base(ladoInferior, altura, radio)
         {
             Tipo = Enums.EnumTipoFigura.Triangulo;
+            CantidadLados = 3;
             Radio = null;
             CalcularPerimetro();
             CalcularArea();
@@ -26,7 +22,15 @@ namespace CodingChallenge.Data.Classes
 
         protected override void CalcularArea()
         {
-            Area = (Base.Value * Altura.Value) / 2;
+            try
+            {
+                Area = Math.Abs((Base.Value * Altura.Value) / 2);
+            }
+            catch (Exception)
+            {
+                Area = 0;
+                throw new InvalidOperationException("Solo el primer se admite para el triangulo. Los otros deben ser nulos.");
+            }
         }
         public string Imprimir(EnumIdiomas idioma)
         {

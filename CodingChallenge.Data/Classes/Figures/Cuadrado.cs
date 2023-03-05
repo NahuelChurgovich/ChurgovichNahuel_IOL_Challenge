@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using CodingChallenge.Data.Enums;
 using CodingChallenge.Data.Interfaces;
@@ -13,12 +9,12 @@ namespace CodingChallenge.Data.Classes
     {
         static Cuadrado()
         {
-            CantidadLados = 4;
         }
-        public Cuadrado(decimal? ladoInferior, decimal? altura, decimal? radio)
+        public Cuadrado(double? ladoInferior, double? altura, double? radio)
             : base(ladoInferior, altura, radio)
         {
             Tipo = Enums.EnumTipoFigura.Cuadrado;
+            CantidadLados = 4;
             Radio = null;
             CalcularPerimetro();
             CalcularArea();
@@ -26,17 +22,14 @@ namespace CodingChallenge.Data.Classes
 
         protected override void CalcularArea()
         {
-            if (Base.HasValue && Altura.HasValue && Base.Value == Altura.Value)
+            try
             {
-                Area = Base.Value * Altura.Value;
+                Area = Math.Abs(Base.Value * Base.Value);
             }
-            else if (Base.HasValue)
+            catch (Exception)
             {
-                Area = Base.Value * Base.Value;
-            }
-            else
-            {
-                Area = Altura.Value * Altura.Value;
+                Area = 0;
+                throw new InvalidOperationException("Solo el primer parámetro se admite para el cuadrado. Los otros deben ser nulos.");
             }
         }
 

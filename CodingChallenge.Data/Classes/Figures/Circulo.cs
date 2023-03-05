@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using CodingChallenge.Data.Enums;
 using CodingChallenge.Data.Interfaces;
@@ -13,12 +9,12 @@ namespace CodingChallenge.Data.Classes
     {
         static Circulo()
         {
-            CantidadLados = 0;
         }
-        public Circulo(decimal? ladoInferior, decimal? altura, decimal? radio)
+        public Circulo(double? ladoInferior, double? altura, double? radio)
             : base(ladoInferior, altura, radio)
         {
             Tipo = Enums.EnumTipoFigura.Circulo;
+            CantidadLados = 0;
             Base = null;
             Altura = null;
             CalcularPerimetro();
@@ -27,14 +23,33 @@ namespace CodingChallenge.Data.Classes
 
         protected override void CalcularPerimetro()
         {
-            Perimetro = Math.Round((decimal)Math.PI * Radio.Value * 2, 2);
+            try
+            {
+                Perimetro = Math.Abs(Math.Round(Math.PI * Radio.Value * 2, 2));
+            }
+            catch (Exception)
+            {
+                Perimetro = 0;
+                throw new InvalidOperationException("Solo el parámetro de radio se admite para el circulo. Los otros deben ser nulos.");
+            }
         }
         protected override void CalcularArea()
         {
-            Area = Math.Round((decimal)Math.PI * Radio.Value * Radio.Value, 2);
+            try
+            {
+                Area = Math.Abs(Math.Round(Math.PI * Radio.Value * Radio.Value, 2));
+            }
+            catch (Exception)
+            {
+                Perimetro = 0;
+                throw new InvalidOperationException("Solo el parámetro de radio se admite para el circulo. Los otros deben ser nulos.");
+            }
         }
 
-        public string Imprimir(EnumIdiomas idioma) { return $"{Traductor.Traducir($"{this.tipo}", idioma)} | {Traductor.Traducir("Área", idioma)} {this.area:#.##} | " +
-                $"{Traductor.Traducir("Perímetro", idioma)} {this.perimetro:#.##} | {Traductor.Traducir("Radio", idioma)} {this.radio:#.##}<br/>"; }
+        public string Imprimir(EnumIdiomas idioma)
+        {
+            return $"{Traductor.Traducir($"{this.tipo}", idioma)} | {Traductor.Traducir("Área", idioma)} {this.area:#.##} | " +
+                    $"{Traductor.Traducir("Perímetro", idioma)} {this.perimetro:#.##} | {Traductor.Traducir("Radio", idioma)} {this.radio:#.##}<br/>";
+        }
     }
 }

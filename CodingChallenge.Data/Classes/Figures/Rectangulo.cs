@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using CodingChallenge.Data.Enums;
 using CodingChallenge.Data.Interfaces;
@@ -13,12 +9,12 @@ namespace CodingChallenge.Data.Classes
     {
         static Rectangulo()
         {
-            CantidadLados = 4;
         }
-        public Rectangulo(decimal? ladoInferior, decimal? altura, decimal? radio)
+        public Rectangulo(double? ladoInferior, double? altura, double? radio)
             : base(ladoInferior, altura, radio)
         {
             Tipo = Enums.EnumTipoFigura.Rectangulo;
+            CantidadLados = 4;
             Radio = null;
             CalcularPerimetro();
             CalcularArea();
@@ -26,11 +22,27 @@ namespace CodingChallenge.Data.Classes
 
         protected override void CalcularPerimetro()
         {
-            Perimetro = (Base.Value * 2) + (Altura.Value * 2);
+            try
+            {
+                Perimetro = (Math.Abs(Base.Value) * 2) + (Math.Abs(Altura.Value) * 2);
+            }
+            catch (Exception)
+            {
+                Area = 0;
+                throw new InvalidOperationException("Solo el primer  y segundo parámetro se admiten para el rectángulo. El ultimo debe ser nulos.");
+            }
         }
         protected override void CalcularArea()
         {
-            Area = Base.Value * Altura.Value;
+            try
+            {
+                Area = Math.Abs(Base.Value) * Math.Abs(Altura.Value);
+            }
+            catch (Exception)
+            {
+                Area = 0;
+                throw new InvalidOperationException("Solo el primer  y segundo parámetro se admiten para el rectángulo. El ultimo debe ser nulos.");
+            }
         }
 
         public string Imprimir(EnumIdiomas idioma)

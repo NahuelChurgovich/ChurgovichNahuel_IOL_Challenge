@@ -1,17 +1,4 @@
-﻿/*
- * Refactorear la clase para respetar principios de programación orientada a objetos. Qué pasa si debemos soportar un nuevo idioma para los reportes, o
- * agregar más formas geométricas?
- *
- * Se puede hacer cualquier cambio que se crea necesario tanto en el código como en los tests. La única condición es que los tests pasen OK.
- *
- * TODO: Implementar Trapecio/Rectángulo, agregar otro idioma a reporting.
- * */
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
+﻿using System;
 using CodingChallenge.Data.Enums;
 
 namespace CodingChallenge.Data.Classes
@@ -20,26 +7,26 @@ namespace CodingChallenge.Data.Classes
     {
         #region Atributos
         public EnumTipoFigura tipo;
-        public decimal perimetro;
-        public decimal area;
-        public decimal? ladoInferior; // este atributo representa la base, pero dicha nomenclatura no se puede utilizar por se una palabra reservada.
-        public decimal? altura;
-        public decimal? radio;
+        public double perimetro;
+        public double area;
+        public double? ladoInferior; // este atributo representa la base, pero dicha nomenclatura no se puede utilizar por se una palabra reservada.
+        public double? altura;
+        public double? radio;
         #endregion
 
         #region Propiedades
 
         protected EnumTipoFigura Tipo { get => tipo; set => this.tipo = value; }
-        protected static int CantidadLados { get; set; }
-        protected decimal Perimetro { get => perimetro; set => this.perimetro = value; }
-        protected decimal Area { get => area; set => this.area = value; }
-        protected decimal? Base { get => ladoInferior; set => this.ladoInferior = value; }
-        protected decimal? Altura { get => altura; set => this.altura = value; }
-        protected decimal? Radio { get => radio; set => this.radio = value; }
+        protected int CantidadLados { get; set; }
+        protected double Perimetro { get => perimetro; set => this.perimetro = Math.Abs(value); }
+        protected double Area { get => area; set => this.area = Math.Abs(value); }
+        protected double? Base { get => ladoInferior; set => this.ladoInferior = value; }
+        protected double? Altura { get => altura; set => this.altura = value; }
+        protected double? Radio { get => radio; set => this.radio = value; }
         #endregion
 
         #region Constructores
-        public FormaGeometrica(decimal? ladoInferior, decimal? altura, decimal? radio)
+        public FormaGeometrica(double? ladoInferior, double? altura, double? radio)
         {
             this.ladoInferior = ladoInferior;
             this.altura = altura;
@@ -55,18 +42,18 @@ namespace CodingChallenge.Data.Classes
         /// <exception cref="Exception"></exception>
         protected virtual void CalcularPerimetro()
         {
-            decimal perimetro = 0;
+            double perimetro = 0;
             try
             {
                 for (int i = 0; i < CantidadLados; i++)
                 {
-                    perimetro += Base.Value;
+                    perimetro += Math.Abs((double)this.ladoInferior);
                 }
                 Perimetro = perimetro;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw new Exception("Ocurrió un error al calcular el perímetro", ex);
+            throw new InvalidOperationException($"Solo el parámetro de lado inferior se admite para el {tipo}. Los otros deben ser nulos.");
             }
         }
         /// <summary>

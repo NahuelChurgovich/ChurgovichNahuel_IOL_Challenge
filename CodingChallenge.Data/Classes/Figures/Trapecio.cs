@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using CodingChallenge.Data.Enums;
 using CodingChallenge.Data.Interfaces;
@@ -11,33 +7,50 @@ namespace CodingChallenge.Data.Classes
 {
     public class Trapecio : FormaGeometrica, IImprimible
     {
-        private decimal? ladoSuperior;
-        private decimal? BaseSuperior { get => ladoSuperior; set => this.ladoSuperior = value; }
+        private double? ladoSuperior;
+        private double? ladoIzquierdo;
+        private double? ladoDerecho;
+
         static Trapecio()
         {
-            CantidadLados = 4;
         }
-        public Trapecio(decimal? ladoInferior, decimal? altura, decimal? radio, decimal? ladoSuperior)
+        public Trapecio(double? ladoInferior, double? altura, double? radio, double? ladoSuperior, double? ladoIzquierdo, double? ladoDerecho)
             : base(ladoInferior, altura, radio)
         {
             Tipo = Enums.EnumTipoFigura.Trapecio;
+            CantidadLados = 4;
             Radio = null;
             this.ladoSuperior = ladoSuperior;
+            this.ladoIzquierdo = ladoIzquierdo;
+            this.ladoDerecho = ladoDerecho;
             CalcularPerimetro();
             CalcularArea();
         }
         protected override void CalcularPerimetro()
         {
-            Perimetro = Math.Round(Altura.Value + Base.Value + BaseSuperior.Value + ((decimal)Math.Sqrt((double)((Altura.Value * Altura.Value) +
-              (Math.Abs((decimal)ladoSuperior - Base.Value) * Math.Abs((decimal)ladoSuperior - Base.Value))))),2);
+            try
+            {
+                Perimetro = Math.Abs((double)ladoInferior) + Math.Abs((double)ladoSuperior) + Math.Abs((double)ladoIzquierdo) + Math.Abs((double)ladoDerecho);
+            }
+            catch (Exception)
+            {
+                Perimetro = 0;
+                throw new InvalidOperationException("El tercer parámetro debe ser nulo en el Trapecio, el resto deben contener un valor.");
+            }
 
         }
         protected override void CalcularArea()
         {
-            Area = (decimal)((ladoSuperior + Base.Value) * Altura.Value) / 2;
+            try
+            {
+                Area = Math.Abs(((Math.Abs((double)ladoInferior) + Math.Abs((double)ladoSuperior)) * Math.Abs((double)altura)) / 2);
+            }
+            catch (Exception)
+            {
+                Area = 0;
+                throw new InvalidOperationException("El tercer parámetro debe ser nulo en el Trapecio, el resto deben contener un valor.");
+            }
         }
-
-        public decimal? GetBaseSuperior() { return BaseSuperior; }
 
         public string Imprimir(EnumIdiomas idioma)
         {
