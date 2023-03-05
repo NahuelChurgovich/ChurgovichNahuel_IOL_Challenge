@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CodingChallenge.Data.Traductor {
+namespace CodingChallenge.Data.Traductor.Recursos {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace CodingChallenge.Data.Traductor {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CodingChallenge.Data.Traductor.Diccionario", typeof(Diccionario).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CodingChallenge.Data.Traductor.Recursos.Diccionario", typeof(Diccionario).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
